@@ -1,0 +1,184 @@
+<div class="page-header">
+    <div class="container">
+        <h1>
+            <i class="fas fa-list"></i>
+            Enumeration Report
+        </h1>
+        <p class="subtitle">Detailed service discovery and content enumeration results</p>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Summary Statistics -->
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="stats-card">
+                <h3>{{ open_ports_count }}</h3>
+                <p>Open Ports Discovered</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="stats-card">
+                <h3>{{ directories_count }}</h3>
+                <p>Directories Found</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="stats-card">
+                <h3>{{ hidden_params_count }}</h3>
+                <p>Hidden Parameters</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Tabs -->
+    <ul class="nav nav-tabs" id="enumerationTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="network-tab" data-bs-toggle="tab" data-bs-target="#network-content" type="button" role="tab">
+                <i class="fas fa-network-wired me-2"></i>Network Scanning
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="content-tab" data-bs-toggle="tab" data-bs-target="#content-content" type="button" role="tab">
+                <i class="fas fa-folder me-2"></i>Content Discovery
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="parameters-tab" data-bs-toggle="tab" data-bs-target="#parameters-content" type="button" role="tab">
+                <i class="fas fa-key me-2"></i>Hidden Parameters
+            </button>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="enumerationTabContent">
+        <!-- Network Scanning Tab -->
+        <div class="tab-pane fade show active" id="network-content" role="tabpanel">
+            <h2><i class="fas fa-network-wired text-primary"></i> Network Port Scanning</h2>
+            
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle me-2"></i>
+                <strong>Nmap Scan Results:</strong> Comprehensive port and service detection using Nmap
+            </div>
+
+            <!-- Port Summary -->
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0"><i class="fas fa-chart-bar me-2"></i>Scan Summary</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6>Scan Details:</h6>
+                                    <ul class="list-unstyled">
+                                        <li><i class="fas fa-clock text-muted me-2"></i>Scan Type: Service Detection (-sV)</li>
+                                        <li><i class="fas fa-tachometer-alt text-muted me-2"></i>Timing: T4 (Aggressive)</li>
+                                        <li><i class="fas fa-list text-muted me-2"></i>Ports: Top 1000</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6>Results:</h6>
+                                    <span class="badge badge-custom">{{ open_ports_count }} Open Ports</span>
+                                    <span class="badge bg-secondary ms-2">Service Detection Enabled</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Results -->
+            <h4>Detailed Nmap Output</h4>
+            <pre><code>{{ nmap_data }}</code></pre>
+        </div>
+
+        <!-- Content Discovery Tab -->
+        <div class="tab-pane fade" id="content-content" role="tabpanel">
+            <h2><i class="fas fa-folder text-warning"></i> Content Discovery</h2>
+            
+            <div class="alert alert-info">
+                <i class="fas fa-search me-2"></i>
+                <strong>Directory Bruteforcing:</strong> Systematic discovery of hidden directories and files using Gobuster
+            </div>
+
+            <!-- Discovery Summary -->
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header bg-warning text-dark">
+                            <h5 class="mb-0"><i class="fas fa-folder-open me-2"></i>Discovery Summary</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6>Tool Configuration:</h6>
+                                    <ul class="list-unstyled">
+                                        <li><i class="fas fa-list text-muted me-2"></i>Wordlist: /usr/share/wordlists/dirb/common.txt</li>
+                                        <li><i class="fas fa-bolt text-muted me-2"></i>Threads: 50</li>
+                                        <li><i class="fas fa-ban text-muted me-2"></i>Excluded: 403, 404, 500 responses</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6>Results:</h6>
+                                    <span class="badge badge-custom">{{ directories_count }} Directories Found</span>
+                                    <span class="badge bg-secondary ms-2">Content Discovery</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Results -->
+            <h4>Gobuster Directory Scan Results</h4>
+            <pre><code>{{ content_discovery_data }}</code></pre>
+        </div>
+
+        <!-- Hidden Parameters Tab -->
+        <div class="tab-pane fade" id="parameters-content" role="tabpanel">
+            <h2><i class="fas fa-key text-success"></i> Hidden Parameter Discovery</h2>
+            
+            <div class="alert alert-info">
+                <i class="fas fa-search-plus me-2"></i>
+                <strong>Parameter Discovery:</strong> Automated detection of hidden HTTP parameters using Arjun
+            </div>
+
+            <!-- Parameter Summary -->
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0"><i class="fas fa-cog me-2"></i>Parameter Analysis</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6>Discovery Method:</h6>
+                                    <ul class="list-unstyled">
+                                        <li><i class="fas fa-robot text-muted me-2"></i>Tool: Arjun</li>
+                                        <li><i class="fas fa-flask text-muted me-2"></i>Method: Fuzzing & Analysis</li>
+                                        <li><i class="fas fa-shield-alt text-muted me-2"></i>Security Focus: Hidden Parameters</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6>Discovery Results:</h6>
+                                    <span class="badge badge-custom">{{ hidden_params_count }} Parameters Found</span>
+                                    <span class="badge bg-secondary ms-2">Security Critical</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Results -->
+            <h4>Hidden Parameter Detection Results</h4>
+            <div class="alert alert-info">
+                <i class="fas fa-lightbulb me-2"></i>
+                <strong>Note:</strong> Hidden parameters can often lead to security vulnerabilities and should be tested thoroughly
+            </div>
+            <pre><code>{{ hidden_param_data }}</code></pre>
+        </div>
+    </div>
+</div>

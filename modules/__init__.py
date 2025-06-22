@@ -1,0 +1,1 @@
+# hunterNG/modules/__init__.py

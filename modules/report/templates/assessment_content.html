@@ -1,0 +1,181 @@
+<div class="page-header">
+    <div class="container">
+        <h1>
+            <i class="fas fa-shield-alt"></i>
+            Security Assessment Report
+        </h1>
+        <p class="subtitle">Vulnerability analysis and security testing results</p>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Security Status Overview -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            {{ security_status_card }}
+        </div>
+    </div>
+
+    <!-- Vulnerability Statistics -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card border-danger">
+                <div class="card-body text-center">
+                    <h3 class="text-danger">{{ critical_count }}</h3>
+                    <p class="mb-0">Critical Issues</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-warning">
+                <div class="card-body text-center">
+                    <h3 class="text-warning">{{ high_count }}</h3>
+                    <p class="mb-0">High Priority</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-info">
+                <div class="card-body text-center">
+                    <h3 class="text-info">{{ medium_count }}</h3>
+                    <p class="mb-0">Medium Risk</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-secondary">
+                <div class="card-body text-center">
+                    <h3 class="text-secondary">{{ low_count }}</h3>
+                    <p class="mb-0">Low Risk</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Assessment Results -->
+    <div id="assessment-report">
+        <ul class="nav nav-tabs" id="assessmentTab" role="tablist">
+            {{ assessment_tabs }}
+        </ul>
+
+        <div class="tab-content" id="assessmentTabContent">
+            {{ assessment_contents }}
+        </div>
+    </div>
+
+    <!-- Security Recommendations -->
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="fas fa-lightbulb me-2"></i>Security Recommendations</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6><i class="fas fa-check-circle text-success me-2"></i>Immediate Actions:</h6>
+                            <ul>
+                                <li>Patch all identified critical vulnerabilities</li>
+                                <li>Implement input validation and sanitization</li>
+                                <li>Review and secure exposed sensitive endpoints</li>
+                                <li>Update software components to latest versions</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6><i class="fas fa-shield-alt text-info me-2"></i>Long-term Security:</h6>
+                            <ul>
+                                <li>Implement a Web Application Firewall (WAF)</li>
+                                <li>Regular security testing and code reviews</li>
+                                <li>Security awareness training for developers</li>
+                                <li>Establish a vulnerability management program</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Assessment-specific styles */
+.vulnerability-badge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+}
+
+.severity-critical {
+    background-color: #dc2626;
+    color: white;
+}
+
+.severity-high {
+    background-color: #ea580c;
+    color: white;
+}
+
+.severity-medium {
+    background-color: #d97706;
+    color: white;
+}
+
+.severity-low {
+    background-color: #65a30d;
+    color: white;
+}
+
+.severity-info {
+    background-color: #0891b2;
+    color: white;
+}
+
+.vuln-entry {
+    border-left: 4px solid #e5e7eb;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background-color: #f9fafb;
+    border-radius: 0 0.5rem 0.5rem 0;
+}
+
+.vuln-entry.critical {
+    border-left-color: #dc2626;
+    background-color: #fef2f2;
+}
+
+.vuln-entry.high {
+    border-left-color: #ea580c;
+    background-color: #fff7ed;
+}
+
+.vuln-entry.medium {
+    border-left-color: #d97706;
+    background-color: #fffbeb;
+}
+
+.vuln-entry.low {
+    border-left-color: #65a30d;
+    background-color: #f7fee7;
+}
+
+.security-score {
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+.score-excellent {
+    color: #059669;
+}
+
+.score-good {
+    color: #65a30d;
+}
+
+.score-fair {
+    color: #d97706;
+}
+
+.score-poor {
+    color: #dc2626;
+}
+</style>

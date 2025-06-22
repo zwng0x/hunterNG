@@ -1,0 +1,125 @@
+# hunterNG/config/default_config.yaml
+
+general:
+  default_output_directory: "output"
+  verbose: false
+  show_sample_count: 5
+
+recon:
+  whois:
+    enabled: true
+    command: "whois {target}"
+    input_type: "target"
+    timeout: 10
+
+  nslookup:
+    enabled: true
+    command: "nslookup {target}"
+    input_type: "target"
+    timeout: 10
+
+  enum_subdomains:
+    enabled: true
+    command: "subfinder -silent -d {target}"
+    input_type: "target"
+    timeout: 60
+
+  check_live_hosts:
+    enabled: true
+    command: "httpxx -mc 200,301,302,403 -threads 50 -timeout 5"
+    input_type: "stdin"
+    timeout: 60
+
+  gau:
+    enabled: true  
+    command: "gau --threads 50"
+    input_type: "stdin"
+    timeout: 120
+
+  katana:
+    enabled: true
+    command: "katana -silent -fs rdn -jc -kf all"
+    input_type: "stdin"
+    timeout: 120
+
+  katana_qurl:
+    enabled: true
+    command: "katana -silent -f qurl"
+    input_type: "stdin"
+    timeout: 120
+
+  uro:
+    enabled: true
+    command: "uro"
+    input_type: "stdin"
+    timeout: 10
+
+  check_live_url:
+    enabled: true
+    command: "httpxx -mc 200,301,302,403 -threads 50 -timeout 5"
+    input_type: "stdin"
+    timeout: 60
+
+  grep_qurl:
+    enabled: true
+    command: "grep -E '\\?.+=.+' || true"
+    input_type: "stdin"
+    timeout: 10
+
+  grep_suspicious_url:
+    enabled: true
+    command: "grep -iE '(admin|login|password|pwd|secret|auth|signin|signup|register|config|backup|dev|staging|api-docs|swagger|debug|test|db|phpmyadmin|upload|download|dashboard|console|wp-admin|cpanel|status|health|monitor|git|env|cmd|exec)' || true"
+    input_type: "stdin"
+    timeout: 10
+
+  param_fuzz:
+    enabled: true
+    command: "sed -E 's/([?&][^=]+)=([^&]*)/\\1=FUZZ/g'"
+    input_type: "stdin"
+    timeout: 10
+
+  whatweb:
+    enabled: true
+    command: "whatweb {target} --color NEVER"
+    input_type: "target"
+    timeout: 20
+
+  wappalyzer:
+    enabled: true
+    command: "wappalyzer -i {target} --scan-type full -oH wappalyzer.html"
+    input_type: "target"
+    timeout: 20
+
+enumeration:
+  nmap:
+    enabled: true
+    command: "nmap -sV -T4 --top-ports 1000 {target}"
+    input_type: "target"
+    timeout: 180
+
+  content_discovery:
+    enabled: true
+    command: "gobuster dir -u {target} -w /usr/share/wordlists/dirb/common.txt -t 50 -b 403,404,500 --no-color --no-error -q"
+    input_type: "target"
+    timeout: 120
+
+  hidden_param:
+    enabled: true
+    command: "arjun -u http://{target}"
+    input_type: "target"
+    timeout: 120
+
+assessment:
+  nuclei:
+    enabled: true
+    command: "nuclei -dast -tags sqli,cmdi,crlf,injection,lfi,redirect,rfi,ssrf,ssti,xxe,cve"
+    input_type: "stdin"
+    timeout: 300
+
+  dalfox:
+    enabled: false
+    command: "dalfox pipe"
+    input_type: "stdin"
+    timeout: 300
+
+report: {}

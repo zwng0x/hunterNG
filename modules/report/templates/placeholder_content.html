@@ -1,0 +1,109 @@
+<div class="page-header">
+    <div class="container">
+        <h1>
+            <i class="fas fa-exclamation-circle"></i>
+            {{ page_title }}
+        </h1>
+        <p class="subtitle">Module data not available</p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="alert alert-warning border-0 shadow-lg">
+                <div class="text-center mb-3">
+                    <i class="fas fa-folder-open" style="font-size: 4rem; opacity: 0.3;"></i>
+                </div>
+                <h4 class="alert-heading text-center">
+                    <i class="fas fa-info-circle me-2"></i>No Data Available
+                </h4>
+                <p class="text-center mb-3">
+                    The <strong>{{ page_title }}</strong> module has not been executed yet or no data was generated during the scan.
+                </p>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6><i class="fas fa-lightbulb text-warning me-2"></i>Possible Reasons:</h6>
+                        <ul class="small">
+                            <li>Module was skipped during execution</li>
+                            <li>Module encountered an error</li>
+                            <li>No results were found for this target</li>
+                            <li>Module is still running</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h6><i class="fas fa-cogs text-info me-2"></i>Next Steps:</h6>
+                        <ul class="small">
+                            <li>Re-run the scan with all modules enabled</li>
+                            <li>Check the console output for errors</li>
+                            <li>Verify target accessibility</li>
+                            <li>Review module configuration</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="text-center mt-3">
+                    <small class="text-muted">
+                        <i class="fas fa-terminal me-1"></i>
+                        Run <code>python hunter.py -t {{ target }} --only {{ page_title|lower }}</code> to execute this module
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">
+                        <i class="fas fa-question-circle me-2"></i>About {{ page_title }} Module
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div id="moduleInfo">
+                        <!-- Module-specific information will be inserted here -->
+                        <p class="text-muted">
+                            This module provides important security analysis capabilities. 
+                            Please ensure it runs successfully for a complete assessment.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Add module-specific information based on page title
+document.addEventListener('DOMContentLoaded', function() {
+    const pageTitle = '{{ page_title }}';
+    const moduleInfo = document.getElementById('moduleInfo');
+    
+    const moduleDescriptions = {
+        'Reconnaissance': {
+            description: 'Gathers information about the target including domain details, subdomains, and technology stack.',
+            capabilities: ['WHOIS lookup', 'DNS resolution', 'Subdomain enumeration', 'Technology fingerprinting', 'URL discovery']
+        },
+        'Enumeration': {
+            description: 'Performs detailed scanning to discover services, ports, and hidden content on the target.',
+            capabilities: ['Port scanning', 'Service detection', 'Directory bruteforcing', 'Hidden parameter discovery']
+        },
+        'Assessment': {
+            description: 'Conducts vulnerability assessment using automated security scanners.',
+            capabilities: ['Vulnerability scanning', 'XSS detection', 'SQL injection testing', 'Security analysis']
+        }
+    };
+    
+    const info = moduleDescriptions[pageTitle];
+    if (info) {
+        moduleInfo.innerHTML = `
+            <p><strong>Purpose:</strong> ${info.description}</p>
+            <p><strong>Key Capabilities:</strong></p>
+            <ul>
+                ${info.capabilities.map(cap => `<li>${cap}</li>`).join('')}
+            </ul>
+        `;
+    }
+});
+</script>

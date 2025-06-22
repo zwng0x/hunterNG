@@ -1,0 +1,264 @@
+<div class="page-header">
+    <div class="container">
+        <h1>
+            <i class="fas fa-search"></i>
+            Reconnaissance Report
+        </h1>
+        <p class="subtitle">Comprehensive information gathering and target analysis</p>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Summary Statistics -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="stats-card">
+                <h3>{{ subdomains_count }}</h3>
+                <p>Subdomains Found</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stats-card">
+                <h3>{{ live_hosts_count }}</h3>
+                <p>Live Hosts</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stats-card">
+                <h3>{{ total_urls_count }}</h3>
+                <p>URLs Discovered</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stats-card">
+                <h3>{{ suspicious_urls_count }}</h3>
+                <p>Suspicious URLs</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Tabs -->
+    <ul class="nav nav-tabs" id="reconTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview-content" type="button" role="tab">
+                <i class="fas fa-info-circle me-2"></i>Target Overview
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="dns-tab" data-bs-toggle="tab" data-bs-target="#dns-content" type="button" role="tab">
+                <i class="fas fa-server me-2"></i>DNS Analysis
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="subdomains-tab" data-bs-toggle="tab" data-bs-target="#subdomains-content" type="button" role="tab">
+                <i class="fas fa-sitemap me-2"></i>Subdomains
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="technology-tab" data-bs-toggle="tab" data-bs-target="#technology-content" type="button" role="tab">
+                <i class="fas fa-cogs me-2"></i>Technology Stack
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="urls-tab" data-bs-toggle="tab" data-bs-target="#urls-content" type="button" role="tab">
+                <i class="fas fa-link me-2"></i>URL Discovery
+            </button>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="reconTabContent">
+        <!-- Target Overview Tab - Chỉ hiển thị target name và WHOIS -->
+        <div class="tab-pane fade show active" id="overview-content" role="tabpanel">
+            <h2><i class="fas fa-info-circle text-primary"></i> Target Overview</h2>
+            
+            <!-- Target Information Card -->
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0"><i class="fas fa-bullseye me-2"></i>Target Information</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h6><i class="fas fa-crosshairs text-primary me-2"></i>Primary Target:</h6>
+                                    <p class="fs-5 text-primary fw-bold mb-0">{{ target_name }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- WHOIS Information -->
+            <h4><i class="fas fa-id-card text-info me-2"></i>WHOIS Information</h4>
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle me-2"></i>
+                <strong>Domain Registration Details:</strong> Registration information and domain ownership data
+            </div>
+            <pre><code>{{ whois_data }}</code></pre>
+        </div>
+
+        <!-- DNS Analysis Tab - Chỉ hiển thị NS lookup results -->
+        <div class="tab-pane fade" id="dns-content" role="tabpanel">
+            <h2><i class="fas fa-server text-info"></i> DNS Analysis</h2>
+            
+            <div class="alert alert-info">
+                <i class="fas fa-search me-2"></i>
+                <strong>DNS Lookup Results:</strong> Domain Name System resolution and DNS record information
+            </div>
+
+            <!-- DNS Summary Card -->
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header bg-info text-white">
+                            <h5 class="mb-0"><i class="fas fa-dns me-2"></i>DNS Resolution Summary</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h6>Query Information:</h6>
+                                    <ul class="list-unstyled">
+                                        <li><i class="fas fa-search text-muted me-2"></i>DNS Record Lookup</li>
+                                        <li><i class="fas fa-server text-muted me-2"></i>Name Resolution</li>
+                                        <li><i class="fas fa-network-wired text-muted me-2"></i>IP Address Mapping</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NSLookup Results -->
+            <h4><i class="fas fa-terminal text-primary me-2"></i>NSLookup Results</h4>
+            <pre><code>{{ nslookup_data }}</code></pre>
+        </div>
+
+        <!-- Subdomains Tab -->
+        <div class="tab-pane fade" id="subdomains-content" role="tabpanel">
+            <h2><i class="fas fa-sitemap text-success"></i> Subdomain Enumeration</h2>
+            <div class="alert alert-info">
+                <i class="fas fa-check-circle me-2"></i>
+                <strong>Discovery Results:</strong> Found {{ subdomains_count }} subdomains, {{ live_hosts_count }} are currently active
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>All Discovered Subdomains</h4>
+                    <pre><code>{{ subdomains_data }}</code></pre>
+                </div>
+                <div class="col-md-6">
+                    <h4>Active Hosts</h4>
+                    <pre><code>{{ live_hosts_data }}</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Technology Stack Tab -->
+        <div class="tab-pane fade" id="technology-content" role="tabpanel">
+            <h2><i class="fas fa-cogs text-warning"></i> Technology Identification</h2>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>WhatWeb Analysis</h4>
+                    <div class="alert alert-info">
+                        <i class="fas fa-search me-2"></i>
+                        Web technology fingerprinting results
+                    </div>
+                    <pre><code>{{ whatweb_data }}</code></pre>
+                </div>
+                <div class="col-md-6">
+                    <h4>Wappalyzer Report</h4>
+                    <div class="alert alert-info">
+                        <i class="fas fa-chart-bar me-2"></i>
+                        Detailed technology stack analysis
+                    </div>
+                    {{ wappalyzer_content_area }}
+                </div>
+            </div>
+        </div>
+
+        <!-- URL Discovery Tab -->
+        <div class="tab-pane fade" id="urls-content" role="tabpanel">
+            <h2><i class="fas fa-link text-primary"></i> URL Discovery & Analysis</h2>
+            
+            <!-- URL Statistics -->
+            <div class="row mb-4">
+                <div class="col-md-4">
+                    <div class="card border-primary">
+                        <div class="card-body text-center">
+                            <h3 class="text-primary">{{ url_no_param_count }}</h3>
+                            <p class="mb-0">URLs without Parameters</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card border-warning">
+                        <div class="card-body text-center">
+                            <h3 class="text-warning">{{ url_param_count }}</h3>
+                            <p class="mb-0">URLs with Parameters</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card border-danger">
+                        <div class="card-body text-center">
+                            <h3 class="text-danger">{{ suspicious_urls_count }}</h3>
+                            <p class="mb-0">Suspicious URLs</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- URL Content Tabs -->
+            <ul class="nav nav-pills mb-3" id="urlPills" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="url-noparam-pill" data-bs-toggle="pill" data-bs-target="#url-noparam-content" type="button" role="tab">
+                        Standard URLs
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="url-param-pill" data-bs-toggle="pill" data-bs-target="#url-param-content" type="button" role="tab">
+                        Parameterized URLs
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="url-suspicious-pill" data-bs-toggle="pill" data-bs-target="#url-suspicious-content" type="button" role="tab">
+                        <span class="badge bg-danger me-1">!</span>Suspicious URLs
+                    </button>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="url-noparam-content" role="tabpanel">
+                    <h4>URLs without Parameters</h4>
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        These URLs don't contain query parameters but may still be valuable for content discovery
+                    </div>
+                    <pre><code>{{ url_no_param_data }}</code></pre>
+                </div>
+                <div class="tab-pane fade" id="url-param-content" role="tabpanel">
+                    <h4>URLs with Parameters</h4>
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        These URLs contain parameters and should be prioritized for security testing
+                    </div>
+                    <pre><code>{{ url_param_data }}</code></pre>
+                </div>
+                <div class="tab-pane fade" id="url-suspicious-content" role="tabpanel">
+                    <h4>Suspicious URLs</h4>
+                    <div class="alert alert-danger">
+                        <i class="fas fa-skull-crossbones me-2"></i>
+                        <strong>High Priority:</strong> These URLs contain suspicious keywords and should be investigated immediately
+                    </div>
+                    
+                    <!-- Enhanced Suspicious URLs Display -->
+                    {{ sus_url_data }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

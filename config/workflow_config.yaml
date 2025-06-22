@@ -1,0 +1,193 @@
+# hunterNG/config/workflow_config.yaml
+
+domain:
+  recon_config:
+    whois: true
+    nslookup: true
+    enum_subdomains: true
+    get_archived_url: true
+    crawl_web: true
+    filter_url: true
+    identify_tech: true
+  enumeration_config:
+    nmap: true
+    content_discovery: true
+    hidden_param: true
+  assessment_config:
+    vuln_scan: true
+
+subdomain:
+  recon_config:
+    whois: false
+    nslookup: true
+    enum_subdomains: false
+    get_archived_url: true
+    crawl_web: true
+    filter_url: true
+    identify_tech: true
+  enumeration_config:
+    nmap: true
+    content_discovery: true
+    hidden_param: true
+  assessment_config:
+    vuln_scan: true
+
+ipv4:
+  recon_config:
+    whois: false
+    nslookup: false
+    enum_subdomains: false
+    get_archived_url: false
+    crawl_web: true
+    filter_url: true
+    identify_tech: false
+  enumeration_config:
+    nmap: true
+    content_discovery: true
+    hidden_param: true
+  assessment_config:
+    vuln_scan: true
+
+url:
+  recon_config:
+    whois: false
+    nslookup: false
+    enum_subdomains: false
+    get_archived_url: false
+    crawl_web: true
+    filter_url: true
+    identify_tech: true
+  enumeration_config:
+    nmap: false
+    content_discovery: true
+    hidden_param: true
+  assessment_config:
+    vuln_scan: true
+
+url_with_port:
+  recon_config:
+    whois: false
+    nslookup: false
+    enum_subdomains: false
+    get_archived_url: false
+    crawl_web: true
+    filter_url: true
+    identify_tech: true
+  enumeration_config:
+    nmap: true
+    content_discovery: true
+    hidden_param: true
+  assessment_config:
+    vuln_scan: true
+
+url_with_ip:
+  recon_config:
+    whois: false
+    nslookup: false
+    enum_subdomains: false
+    get_archived_url: false
+    crawl_web: true
+    filter_url: true
+    identify_tech: true
+  enumeration_config:
+    nmap: true
+    content_discovery: true
+    hidden_param: true
+  assessment_config:
+    vuln_scan: true
+
+url_with_ip_port:
+  recon_config:
+    whois: false
+    nslookup: false
+    enum_subdomains: false
+    get_archived_url: false
+    crawl_web: true
+    filter_url: true
+    identify_tech: true
+  enumeration_config:
+    nmap: true
+    content_discovery: true
+    hidden_param: true
+  assessment_config:
+    vuln_scan: true
+
+domain_with_port:
+  recon_config:
+    whois: true
+    nslookup: true
+    enum_subdomains: true
+    get_archived_url: true
+    crawl_web: true
+    filter_url: true
+    identify_tech: true
+  enumeration_config:
+    nmap: true
+    content_discovery: true
+    hidden_param: true
+  assessment_config:
+    vuln_scan: true
+
+subdomain_with_port:
+  recon_config:
+    whois: false
+    nslookup: true
+    enum_subdomains: false
+    get_archived_url: true
+    crawl_web: true
+    filter_url: true
+    identify_tech: true
+  enumeration_config:
+    nmap: true
+    content_discovery: true
+    hidden_param: true
+  assessment_config:
+    vuln_scan: true
+
+ipv4_with_port:
+  recon_config:
+    whois: false
+    nslookup: true
+    enum_subdomains: false
+    get_archived_url: false
+    crawl_web: true
+    filter_url: true
+    identify_tech: false
+  enumeration_config:
+    nmap: true
+    content_discovery: true
+    hidden_param: true
+  assessment_config:
+    vuln_scan: true
+
+localhost:
+  recon_config:
+    whois: false
+    nslookup: false
+    enum_subdomains: false
+    get_archived_url: false
+    crawl_web: true
+    filter_url: true
+    identify_tech: false
+  enumeration_config:
+    nmap: true
+    content_discovery: true
+    hidden_param: true
+  assessment_config:
+    vuln_scan: true
+
+hostname:
+  recon_config:
+    whois: true
+    nslookup: true
+    enum_subdomains: true
+    get_archived_url: true
+    crawl_web: true
+    filter_url: true
+    identify_tech: true
+  enumeration_config:
+    nmap: true
+    content_discovery: true
+    hidden_param: true
+  assessment_config:
+    vuln_scan: true
